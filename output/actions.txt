@@ -1,0 +1,10 @@
+BUY:
+GME
+BB
+PLTR
+AMC
+TSLA
+
+SELL:
+NIO
+AMD
