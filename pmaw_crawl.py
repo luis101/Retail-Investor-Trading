@@ -48,7 +48,7 @@ comments_core_df['day'] = comments_core_df['date'].dt.strftime('%Y-%m-%d')
 
 #Obtain submissions to subreddit:
 
-posts = api.search_submissions(subreddit=subreddit, limit=limit, after=after)
+posts = api.search_submissions(subreddit=subreddit, limit=limit, before=before, after=after)
 print(f'Retrieved {len(posts)} posts from Pushshift')
 
 #post_list = [post for post in posts]
@@ -97,6 +97,20 @@ def call_list(source, column):
         else:
             calllist.append(0)
     return calllist
+
+def word_list(source, column, word):
+    wordlist = []
+
+    pattern = r'\W*((?i))' + re.escape(word) + r'\W*'
+
+    for i in range(0, len(source[column])):
+        #match = re.findall(r'\W*((?i){word})\W*', source[column][i])
+        match = re.findall(pattern, source[column][i])
+        if len(match) > 0:
+            wordlist.append(1)
+        else:
+            wordlist.append(0)
+    return wordlist
 
 #Version 1:
 
